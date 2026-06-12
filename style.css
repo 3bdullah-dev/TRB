@@ -24,8 +24,9 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   width: 100%;
+  max-width: 100vw;
 }
 
 body {
@@ -33,9 +34,10 @@ body {
   background-color: var(--bg-light);
   color: var(--text-dark);
   line-height: 1.8;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   width: 100%;
   max-width: 100vw;
+  position: relative;
 }
 
 .container {
@@ -139,19 +141,20 @@ body {
 }
 
 /* ============================================
-   HERO SECTION - الحل النهائي للمشكلة
+   HERO SECTION - إصلاح كامل
    ============================================ */
 .hero-section {
   position: relative;
   width: 100%;
+  max-width: 100vw;
   min-height: 100vh;
-  min-height: 100dvh; /* للجوال */
+  min-height: 100dvh;
   background: url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80") no-repeat center center/cover;
   display: flex;
   align-items: center;
   color: var(--text-light);
   padding: 120px 0 60px;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 .hero-overlay {
@@ -237,7 +240,6 @@ body {
   min-width: 160px;
   max-width: 100%;
   text-align: center;
-  word-wrap: break-word;
 }
 
 .btn-primary {
@@ -305,7 +307,7 @@ body {
   background-color: #ffffff;
   position: relative;
   width: 100%;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 .about-wrapper {
@@ -453,6 +455,7 @@ body {
   background: url("https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80") no-repeat center center/cover;
   border-radius: 12px;
   box-shadow: var(--shadow-soft);
+  overflow: hidden;
 }
 
 .visual-box {
@@ -503,7 +506,7 @@ body {
   background-color: var(--bg-light);
   position: relative;
   width: 100%;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 .section-header {
@@ -768,7 +771,7 @@ body {
   border-top: 1px solid var(--glass-border);
   position: relative;
   width: 100%;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 .main-footer::before {
@@ -1016,11 +1019,11 @@ body {
   border-color: var(--accent-color);
 }
 
-.lightbox-prev { left: -80px; }
-.lightbox-next { right: -80px; }
+.lightbox-prev { left: 10px; }
+.lightbox-next { right: 10px; }
 
 /* ============================================
-   RESPONSIVE DESIGN - الحل النهائي
+   RESPONSIVE DESIGN - الحل الجذري النهائي
    ============================================ */
 
 /* Tablets */
@@ -1075,9 +1078,6 @@ body {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
   }
-  
-  .lightbox-prev { left: 15px; }
-  .lightbox-next { right: 15px; }
 }
 
 /* Mobile Devices - الحل الجذري */
@@ -1087,6 +1087,12 @@ body {
     overflow-x: hidden !important;
     width: 100% !important;
     max-width: 100vw !important;
+  }
+  
+  /* إخفاء جميع العناصر التي تسبب overflow */
+  .hero-badge,
+  .experience-card {
+    display: none !important;
   }
   
   .container {
@@ -1103,6 +1109,7 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
+    max-width: 100vw;
   }
   
   .hero-content {
@@ -1148,11 +1155,6 @@ body {
     min-width: unset;
     padding: 16px 24px;
     font-size: 16px;
-  }
-  
-  /* إخفاء شارة الضمان على الجوال */
-  .hero-badge {
-    display: none !important;
   }
   
   /* Navigation Mobile */
@@ -1219,6 +1221,11 @@ body {
     width: 100%;
     justify-content: center;
   }
+  
+  /* About Visual Mobile */
+  .about-visual {
+    height: 300px;
+  }
 }
 
 /* Small Mobile Devices */
@@ -1256,15 +1263,5 @@ body {
   
   .section-title {
     font-size: 26px;
-  }
-  
-  .experience-card {
-    right: 10px;
-    bottom: -20px;
-    padding: 25px;
-  }
-  
-  .exp-num {
-    font-size: 36px;
   }
 }
