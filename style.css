@@ -2,12 +2,7 @@
   --primary-color: #0a1520;
   --primary-light: #132238;
   --accent-color: #bfa15f;
-  --gold-gradient: linear-gradient(
-    135deg,
-    #bfa15f 0%,
-    #f0d78c 50%,
-    #bfa15f 100%
-  );
+  --gold-gradient: linear-gradient(135deg, #bfa15f 0%, #f0d78c 50%, #bfa15f 100%);
   --text-dark: #1e293b;
   --text-light: #f8fafc;
   --text-muted: #94a3b8;
@@ -29,19 +24,8 @@
 
 html {
   scroll-behavior: smooth;
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--primary-color);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--accent-color);
-  border-radius: 4px;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -50,12 +34,15 @@ body {
   color: var(--text-dark);
   line-height: 1.8;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
 }
 
 .container {
-  width: 90%;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 /* Header */
@@ -77,6 +64,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .logo a {
@@ -147,12 +138,15 @@ body {
   cursor: pointer;
 }
 
-/* Hero Section - محسن بالكامل */
+/* ============================================
+   HERO SECTION - الحل النهائي للمشكلة
+   ============================================ */
 .hero-section {
   position: relative;
+  width: 100%;
   min-height: 100vh;
-  background: url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80")
-    no-repeat center center/cover;
+  min-height: 100dvh; /* للجوال */
+  background: url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80") no-repeat center center/cover;
   display: flex;
   align-items: center;
   color: var(--text-light);
@@ -166,19 +160,17 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(10, 21, 32, 0.92) 20%,
-    rgba(19, 34, 56, 0.85) 100%
-  );
+  background: linear-gradient(135deg, rgba(10, 21, 32, 0.92) 20%, rgba(19, 34, 56, 0.85) 100%);
   z-index: 1;
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
+  width: 100%;
   max-width: 800px;
   margin: 0 auto;
+  padding: 0 20px;
   text-align: right;
 }
 
@@ -200,6 +192,8 @@ body {
   font-weight: 900;
   line-height: 1.3;
   margin-bottom: 20px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .highlight-text {
@@ -213,15 +207,17 @@ body {
   font-size: 16px;
   color: #cbd5e1;
   margin-bottom: 30px;
-  max-width: 600px;
+  max-width: 100%;
   font-weight: 300;
   line-height: 1.8;
+  word-wrap: break-word;
 }
 
 .hero-buttons {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .btn {
@@ -238,8 +234,10 @@ body {
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  will-change: transform;
   min-width: 160px;
+  max-width: 100%;
+  text-align: center;
+  word-wrap: break-word;
 }
 
 .btn-primary {
@@ -266,7 +264,7 @@ body {
   background: rgba(191, 161, 95, 0.05);
 }
 
-/* Hero Badge - الوضع الطبيعي (كمبيوتر) */
+/* Hero Badge - الكمبيوتر فقط */
 .hero-badge {
   position: absolute;
   bottom: 8%;
@@ -306,6 +304,8 @@ body {
   padding: 120px 0;
   background-color: #ffffff;
   position: relative;
+  width: 100%;
+  overflow: hidden;
 }
 
 .about-wrapper {
@@ -450,8 +450,7 @@ body {
 .about-visual {
   position: relative;
   height: 500px;
-  background: url("https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80")
-    no-repeat center center/cover;
+  background: url("https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80") no-repeat center center/cover;
   border-radius: 12px;
   box-shadow: var(--shadow-soft);
 }
@@ -464,11 +463,7 @@ body {
   height: 100%;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  background: linear-gradient(
-    135deg,
-    rgba(10, 21, 32, 0.4) 0%,
-    transparent 100%
-  );
+  background: linear-gradient(135deg, rgba(10, 21, 32, 0.4) 0%, transparent 100%);
 }
 
 .experience-card {
@@ -507,6 +502,8 @@ body {
   padding: 120px 0;
   background-color: var(--bg-light);
   position: relative;
+  width: 100%;
+  overflow: hidden;
 }
 
 .section-header {
@@ -580,22 +577,17 @@ body {
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Products Cards - محسن للتوسيط والتوسيع */
+/* Products Cards */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 480px));
   justify-content: center;
   gap: 35px;
+  width: 100%;
 }
 
 .product-card {
@@ -604,14 +596,13 @@ body {
   overflow: hidden;
   box-shadow: var(--shadow-soft);
   border: 1px solid rgba(226, 232, 240, 0.6);
-  transition:
-    transform 0.5s ease-out,
-    box-shadow 0.4s ease;
+  transition: transform 0.5s ease-out, box-shadow 0.4s ease;
   display: flex;
   flex-direction: column;
   position: relative;
   transform-style: preserve-3d;
   will-change: transform;
+  width: 100%;
 }
 
 .product-card:hover {
@@ -719,6 +710,7 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .product-price {
@@ -760,7 +752,6 @@ body {
   transition: var(--transition-smooth);
   box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
   white-space: nowrap;
-  will-change: transform;
 }
 
 .btn-whatsapp:hover {
@@ -776,6 +767,8 @@ body {
   padding: 100px 0 30px 0;
   border-top: 1px solid var(--glass-border);
   position: relative;
+  width: 100%;
+  overflow: hidden;
 }
 
 .main-footer::before {
@@ -1023,44 +1016,40 @@ body {
   border-color: var(--accent-color);
 }
 
-.lightbox-prev {
-  left: -80px;
-}
+.lightbox-prev { left: -80px; }
+.lightbox-next { right: -80px; }
 
-.lightbox-next {
-  right: -80px;
-}
+/* ============================================
+   RESPONSIVE DESIGN - الحل النهائي
+   ============================================ */
 
-/* =========================================
-     Responsive Design - الحل النهائي
-     ========================================= */
-
-/* Tablets and Below */
+/* Tablets */
 @media (max-width: 992px) {
   .hero-section {
     padding: 140px 0 80px;
   }
-
+  
   .hero-content {
     text-align: center;
+    padding: 0 30px;
   }
-
+  
   .hero-subtitle {
     border-right: none;
     border-bottom: 3px solid var(--accent-color);
     padding-right: 0;
     padding-bottom: 10px;
   }
-
+  
   .hero-description {
     margin-left: auto;
     margin-right: auto;
   }
-
+  
   .hero-buttons {
     justify-content: center;
   }
-
+  
   .hero-badge {
     position: relative;
     bottom: auto;
@@ -1068,85 +1057,104 @@ body {
     margin: 40px auto 0;
     max-width: 320px;
   }
-
+  
   .about-wrapper {
     grid-template-columns: 1fr;
     gap: 60px;
   }
-
+  
   .about-visual {
     height: 400px;
   }
-
+  
   .experience-card {
     right: 20px;
     bottom: -30px;
   }
-
+  
   .footer-grid {
     grid-template-columns: 1fr 1fr;
   }
-
-  .lightbox-prev {
-    left: 15px;
-  }
-
-  .lightbox-next {
-    right: 15px;
-  }
+  
+  .lightbox-prev { left: 15px; }
+  .lightbox-next { right: 15px; }
 }
 
-/* Mobile Devices */
+/* Mobile Devices - الحل الجذري */
 @media (max-width: 768px) {
-  /* Hero Section - إصلاحات شاملة */
+  /* منع الـ overflow نهائياً */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+  
+  .container {
+    padding: 0 15px;
+    width: 100%;
+  }
+  
+  /* Hero Section - إصلاح كامل */
   .hero-section {
     min-height: 100vh;
-    padding: 110px 0 40px;
+    min-height: 100dvh;
+    padding: 100px 0 40px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
-
+  
   .hero-content {
     width: 100%;
-    padding: 0 20px;
+    max-width: 100%;
+    padding: 0 15px;
+    text-align: center;
   }
-
+  
   .hero-subtitle {
     font-size: 13px;
     margin-bottom: 12px;
     letter-spacing: 1.5px;
+    border-right: none;
+    border-bottom: 2px solid var(--accent-color);
+    padding-right: 0;
+    padding-bottom: 8px;
   }
-
+  
   .hero-title {
     font-size: 28px;
     margin-bottom: 18px;
     line-height: 1.4;
+    word-wrap: break-word;
   }
-
+  
   .hero-description {
     font-size: 15px;
     margin-bottom: 25px;
     line-height: 1.7;
+    padding: 0 5px;
   }
-
+  
   .hero-buttons {
     flex-direction: column;
     width: 100%;
     gap: 12px;
+    padding: 0 5px;
   }
-
+  
   .btn {
     width: 100%;
     min-width: unset;
     padding: 16px 24px;
     font-size: 16px;
   }
-
-  /* ✅ إخفاء شارة الضمان على الجوال لحل مشكلة التداخل والمظهر */
+  
+  /* إخفاء شارة الضمان على الجوال */
   .hero-badge {
     display: none !important;
   }
-
+  
   /* Navigation Mobile */
   .nav-menu {
     position: fixed;
@@ -1160,53 +1168,53 @@ body {
     padding: 40px 20px;
     overflow-y: auto;
   }
-
+  
   .nav-menu.active {
     right: 0;
   }
-
+  
   .nav-menu ul {
     flex-direction: column;
     gap: 25px;
     align-items: center;
   }
-
+  
   .menu-toggle {
     display: block;
     z-index: 1001;
   }
-
+  
   /* Other Sections Mobile */
   .features-grid {
     grid-template-columns: 1fr;
   }
-
+  
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-
+  
   .tab-btn {
     width: 100%;
     justify-content: center;
   }
-
+  
   /* Products Grid Mobile */
   .products-grid {
     grid-template-columns: 1fr;
     gap: 25px;
   }
-
+  
   .product-card {
     max-width: 100%;
   }
-
+  
   .product-meta {
     flex-direction: column;
     align-items: stretch;
     gap: 15px;
   }
-
+  
   .btn-whatsapp {
     width: 100%;
     justify-content: center;
@@ -1216,31 +1224,47 @@ body {
 /* Small Mobile Devices */
 @media (max-width: 480px) {
   .hero-section {
-    padding: 100px 0 30px;
+    padding: 90px 0 30px;
   }
-
+  
   .hero-content {
-    padding: 0 15px;
+    padding: 0 10px;
   }
-
+  
+  .hero-subtitle {
+    font-size: 12px;
+  }
+  
   .hero-title {
     font-size: 26px;
+    line-height: 1.4;
   }
-
+  
   .hero-description {
     font-size: 14px;
+    line-height: 1.7;
   }
-
+  
   .btn {
     padding: 14px 20px;
     font-size: 15px;
   }
-
+  
   .section-header {
     margin-bottom: 40px;
   }
-
+  
   .section-title {
     font-size: 26px;
+  }
+  
+  .experience-card {
+    right: 10px;
+    bottom: -20px;
+    padding: 25px;
+  }
+  
+  .exp-num {
+    font-size: 36px;
   }
 }
