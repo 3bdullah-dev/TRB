@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 3. التبويبات (الأقسام)
+  // 3. التبويبات (الأقسام) - يشمل القسم الجديد
   const tabButtons = document.querySelectorAll(".tab-btn");
   const tabPanels = document.querySelectorAll(".tab-panel");
 
@@ -70,17 +70,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 5. معرض الصور المخصص (Lightbox)
+  // 5. معرض الصور المخصص (Lightbox) - يعمل مع جميع الأقسام بما فيها الأبواب الخشبية
   const lightboxOverlay = document.createElement("div");
   lightboxOverlay.className = "lightbox-overlay";
   lightboxOverlay.innerHTML = `
-      <div class="lightbox-content">
-        <button class="lightbox-close" aria-label="إغلاق"><i class="fas fa-times"></i></button>
-        <button class="lightbox-nav lightbox-prev hover-target" aria-label="السابق"><i class="fas fa-chevron-right"></i></button>
-        <img src="" alt="صورة المنتج" class="lightbox-image">
-        <button class="lightbox-nav lightbox-next hover-target" aria-label="التالي"><i class="fas fa-chevron-left"></i></button>
-      </div>
-    `;
+    <div class="lightbox-content">
+      <button class="lightbox-close" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+      <button class="lightbox-nav lightbox-prev hover-target" aria-label="السابق"><i class="fas fa-chevron-right"></i></button>
+      <img src="" alt="صورة المنتج" class="lightbox-image">
+      <button class="lightbox-nav lightbox-next hover-target" aria-label="التالي"><i class="fas fa-chevron-left"></i></button>
+    </div>
+  `;
   document.body.appendChild(lightboxOverlay);
 
   let currentImages = [];
@@ -200,10 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ==========================================
-  // 7. تحسين رقم 1: تأثير الإمالة ثلاثي الأبعاد (3D Tilt)
-  // يعمل فقط على الأجهزة التي تدعم الماوس (ليس شاشات اللمس) للحفاظ على الأداء
-  // ==========================================
+  // 7. تأثير الإمالة ثلاثي الأبعاد (3D Tilt) - يعمل على جميع الكروت بما فيها الأبواب الخشبية
   if (window.matchMedia("(hover: hover)").matches) {
     const tiltCards = document.querySelectorAll(".glass-tilt");
 
@@ -213,7 +210,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
-        // حساب زاوية الإمالة (بحد أقصى 6 درجات للحفاظ على الأناقة)
         const xRotation = -(((y - rect.height / 2) / rect.height) * 6);
         const yRotation = ((x - rect.width / 2) / rect.width) * 6;
 
@@ -222,7 +218,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       card.addEventListener("mouseleave", () => {
-        // إعادة الكارت لوضعه الطبيعي بسلاسة
         card.style.transform =
           "perspective(1000px) rotateX(0) rotateY(0) translateY(0)";
         card.style.transition = "transform 0.5s ease-out";
