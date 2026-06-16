@@ -2,12 +2,7 @@
   --primary-color: #0a1520;
   --primary-light: #132238;
   --accent-color: #bfa15f;
-  --gold-gradient: linear-gradient(
-    135deg,
-    #bfa15f 0%,
-    #f0d78c 50%,
-    #bfa15f 100%
-  );
+  --gold-gradient: linear-gradient(135deg, #bfa15f 0%, #f0d78c 50%, #bfa15f 100%);
   --text-dark: #1e293b;
   --text-light: #f8fafc;
   --text-muted: #94a3b8;
@@ -29,9 +24,9 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden !important;
+  scroll-padding-top: 80px;
+  overflow-x: hidden;
   width: 100%;
-  max-width: 100vw;
 }
 
 body {
@@ -39,10 +34,11 @@ body {
   background-color: var(--bg-light);
   color: var(--text-dark);
   line-height: 1.8;
-  overflow-x: hidden !important;
+  overflow-x: hidden;
   width: 100%;
-  max-width: 100vw;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .container {
@@ -52,9 +48,7 @@ body {
   padding: 0 20px;
 }
 
-/* ============================================
-   HEADER
-   ============================================ */
+/* Header */
 .main-header {
   position: fixed;
   top: 0;
@@ -148,46 +142,40 @@ body {
 }
 
 /* ============================================
-   HERO SECTION - تصميم جديد بخلفية أنيقة وبطاقة زجاجية
+   HERO SECTION - إصلاح كامل للهوامش والقفز
    ============================================ */
 .hero-section {
   position: relative;
   width: 100%;
-  max-width: 100vw;
   min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 100dvh; /* للجوال */
   display: flex;
   align-items: center;
-  padding: 120px 0 60px;
-  overflow: hidden !important;
-  /* خلفية صورة مصنع زجاجي احترافية */
-  background: url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80")
-    no-repeat center center/cover;
+  justify-content: center;
+  padding: 120px 20px 60px;
+  overflow: hidden;
+  background: url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80") no-repeat center center/cover;
+  background-attachment: fixed;
 }
 
-/* طبقة تظليل داكنة فوق الخلفية */
 .hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(10, 21, 32, 0.75) 0%,
-    rgba(19, 34, 56, 0.65) 100%
-  );
+  background: linear-gradient(135deg, rgba(10, 21, 32, 0.75) 0%, rgba(19, 34, 56, 0.65) 100%);
   z-index: 1;
 }
 
-/* البطاقة الزجاجية التي تحتوي المحتوى */
+/* البطاقة الزجاجية - إصلاح الهوامش */
 .hero-glass-card {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 850px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 50px 45px;
+  padding: 40px 35px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -216,7 +204,7 @@ body {
 }
 
 .hero-title {
-  font-size: clamp(32px, 5vw, 52px);
+  font-size: clamp(28px, 5vw, 52px);
   font-weight: 900;
   line-height: 1.2;
   margin-bottom: 22px;
@@ -261,10 +249,7 @@ body {
   text-decoration: none;
   transition: var(--transition-smooth);
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
   min-width: 170px;
-  max-width: 100%;
   text-align: center;
 }
 
@@ -293,7 +278,7 @@ body {
   background: rgba(191, 161, 95, 0.05);
 }
 
-/* Hero Badge - تصميم زجاجي أنيق */
+/* Hero Badge */
 .hero-badge {
   position: absolute;
   bottom: 8%;
@@ -328,15 +313,12 @@ body {
   font-weight: 600;
 }
 
-/* ============================================
-   ABOUT SECTION
-   ============================================ */
+/* About Section */
 .about-section {
   padding: 120px 0;
   background-color: #ffffff;
   position: relative;
   width: 100%;
-  overflow: hidden !important;
 }
 
 .about-wrapper {
@@ -481,8 +463,7 @@ body {
 .about-visual {
   position: relative;
   height: 500px;
-  background: url("https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80")
-    no-repeat center center/cover;
+  background: url("https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80") no-repeat center center/cover;
   border-radius: 12px;
   box-shadow: var(--shadow-soft);
   overflow: hidden;
@@ -496,11 +477,7 @@ body {
   height: 100%;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  background: linear-gradient(
-    135deg,
-    rgba(10, 21, 32, 0.4) 0%,
-    transparent 100%
-  );
+  background: linear-gradient(135deg, rgba(10, 21, 32, 0.4) 0%, transparent 100%);
 }
 
 .experience-card {
@@ -534,15 +511,12 @@ body {
   color: var(--text-muted);
 }
 
-/* ============================================
-   CATEGORIES SECTION
-   ============================================ */
+/* Categories Section */
 .categories-section {
   padding: 120px 0;
   background-color: var(--bg-light);
   position: relative;
   width: 100%;
-  overflow: hidden !important;
 }
 
 .section-header {
@@ -616,19 +590,11 @@ body {
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* ============================================
-   PRODUCTS CARDS
-   ============================================ */
+/* Products Cards */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 480px));
@@ -643,9 +609,7 @@ body {
   overflow: hidden;
   box-shadow: var(--shadow-soft);
   border: 1px solid rgba(226, 232, 240, 0.6);
-  transition:
-    transform 0.5s ease-out,
-    box-shadow 0.4s ease;
+  transition: transform 0.5s ease-out, box-shadow 0.4s ease;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -809,9 +773,7 @@ body {
   box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
 }
 
-/* ============================================
-   FOOTER
-   ============================================ */
+/* Footer */
 .main-footer {
   background: var(--primary-color);
   color: var(--text-muted);
@@ -819,7 +781,7 @@ body {
   border-top: 1px solid var(--glass-border);
   position: relative;
   width: 100%;
-  overflow: hidden !important;
+  margin-top: auto;
 }
 
 .main-footer::before {
@@ -970,9 +932,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* ============================================
-   LIGHTBOX MODAL
-   ============================================ */
+/* Lightbox Modal */
 .lightbox-overlay {
   position: fixed;
   top: 0;
@@ -1069,42 +1029,37 @@ body {
   border-color: var(--accent-color);
 }
 
-.lightbox-prev {
-  left: 10px;
-}
-
-.lightbox-next {
-  right: 10px;
-}
+.lightbox-prev { left: 10px; }
+.lightbox-next { right: 10px; }
 
 /* ============================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN - إصلاح شامل
    ============================================ */
 
 /* Tablets */
 @media (max-width: 992px) {
   .hero-section {
-    padding: 140px 0 80px;
+    padding: 140px 15px 80px;
   }
-
+  
   .hero-glass-card {
-    padding: 40px 35px;
+    padding: 35px 25px;
   }
-
+  
   .hero-content {
     text-align: center;
   }
-
+  
   .hero-subtitle {
     border-right: none;
     border-bottom: 3px solid var(--accent-color);
     padding: 8px 16px;
   }
-
+  
   .hero-buttons {
     justify-content: center;
   }
-
+  
   .hero-badge {
     position: relative;
     bottom: auto;
@@ -1112,21 +1067,21 @@ body {
     margin: 40px auto 0;
     max-width: 320px;
   }
-
+  
   .about-wrapper {
     grid-template-columns: 1fr;
     gap: 60px;
   }
-
+  
   .about-visual {
     height: 400px;
   }
-
+  
   .experience-card {
     right: 20px;
     bottom: -30px;
   }
-
+  
   .footer-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -1134,44 +1089,39 @@ body {
 
 /* Mobile Devices */
 @media (max-width: 768px) {
-  html,
-  body {
-    overflow-x: hidden !important;
-    width: 100% !important;
-    max-width: 100vw !important;
+  html, body {
+    overflow-x: hidden;
   }
-
+  
   .hero-badge,
   .experience-card {
     display: none !important;
   }
-
+  
   .container {
     padding: 0 15px;
-    width: 100%;
   }
-
+  
+  /* إصلاح الهوامش في الهيرو */
   .hero-section {
     min-height: 100vh;
     min-height: 100dvh;
-    padding: 100px 0 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 100vw;
+    padding: 100px 12px 40px;
+    background-attachment: scroll; /* للجوال فقط */
   }
-
+  
   .hero-glass-card {
-    padding: 30px 20px;
+    padding: 25px 15px;
     border-radius: 16px;
+    width: 100%;
+    max-width: 100%;
   }
-
+  
   .hero-content {
     width: 100%;
     text-align: center;
   }
-
+  
   .hero-subtitle {
     font-size: 13px;
     margin-bottom: 15px;
@@ -1180,32 +1130,32 @@ body {
     border-bottom: 2px solid var(--accent-color);
     padding: 6px 12px;
   }
-
+  
   .hero-title {
     font-size: 28px;
     margin-bottom: 18px;
     line-height: 1.3;
   }
-
+  
   .hero-description {
     font-size: 15px;
     margin-bottom: 25px;
     line-height: 1.7;
   }
-
+  
   .hero-buttons {
     flex-direction: column;
     width: 100%;
     gap: 12px;
   }
-
+  
   .btn {
     width: 100%;
     min-width: unset;
     padding: 16px 24px;
     font-size: 16px;
   }
-
+  
   .nav-menu {
     position: fixed;
     top: 70px;
@@ -1218,58 +1168,58 @@ body {
     padding: 40px 20px;
     overflow-y: auto;
   }
-
+  
   .nav-menu.active {
     right: 0;
   }
-
+  
   .nav-menu ul {
     flex-direction: column;
     gap: 25px;
     align-items: center;
   }
-
+  
   .menu-toggle {
     display: block;
     z-index: 1001;
   }
-
+  
   .features-grid {
     grid-template-columns: 1fr;
   }
-
+  
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-
+  
   .tab-btn {
     width: 100%;
     justify-content: center;
     padding: 14px 20px;
     font-size: 14px;
   }
-
+  
   .products-grid {
     grid-template-columns: 1fr;
     gap: 25px;
   }
-
+  
   .product-card {
     max-width: 100%;
   }
-
+  
   .product-meta {
     flex-direction: column;
     align-items: stretch;
     gap: 15px;
   }
-
+  
   .btn-whatsapp {
     width: 100%;
     justify-content: center;
   }
-
+  
   .about-visual {
     height: 300px;
   }
@@ -1278,37 +1228,37 @@ body {
 /* Small Mobile Devices */
 @media (max-width: 480px) {
   .hero-section {
-    padding: 90px 0 30px;
+    padding: 90px 10px 30px;
   }
-
+  
   .hero-glass-card {
-    padding: 25px 15px;
+    padding: 20px 12px;
   }
-
+  
   .hero-subtitle {
     font-size: 12px;
     padding: 6px 10px;
   }
-
+  
   .hero-title {
     font-size: 26px;
     line-height: 1.3;
   }
-
+  
   .hero-description {
     font-size: 14px;
     line-height: 1.7;
   }
-
+  
   .btn {
     padding: 14px 20px;
     font-size: 15px;
   }
-
+  
   .section-header {
     margin-bottom: 40px;
   }
-
+  
   .section-title {
     font-size: 26px;
   }
