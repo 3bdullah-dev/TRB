@@ -1,26 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. تشغيل مكتبة الأنيمشن
+  // 1. تشغيل مكتبة الأنيمشن - مع تعطيل على الجوال للأداء
+  const isMobile = window.innerWidth < 768;
+  
   AOS.init({
-    duration: 800,
+    duration: isMobile ? 0 : 800,
     easing: "ease-out-cubic",
     once: true,
     mirror: false,
     offset: 50,
+    disable: isMobile, // تعطيل على الجوال لمنع القفز
   });
 
-  // 2. القائمة المتجاوبة (للجوال)
+  // 2. القائمة المتجاوبة
   const menuToggle = document.getElementById("menuToggle");
   const navMenu = document.getElementById("navMenu");
-
+  
   if (menuToggle && navMenu) {
     menuToggle.addEventListener("click", () => {
       navMenu.classList.toggle("active");
       const icon = menuToggle.querySelector("i");
-      if (navMenu.classList.contains("active")) {
-        icon.className = "fas fa-times";
-      } else {
-        icon.className = "fas fa-bars";
-      }
+      icon.className = navMenu.classList.contains("active") 
+        ? "fas fa-times" 
+        : "fas fa-bars";
     });
   }
 
@@ -36,27 +37,51 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 3. التبويبات (الأقسام) - يشمل القسم الجديد
+  // 3. التبويبات مع إصلاح القفز
   const tabButtons = document.querySelectorAll(".tab-btn");
   const tabPanels = document.querySelectorAll(".tab-panel");
-
+  
   tabButtons.forEach((button) => {
     button.addEventListener("click", () => {
       tabButtons.forEach((btn) => btn.classList.remove("active"));
-      tabPanels.forEach((panel) => panel.classList.remove("active"));
+      tabPanels.forEach((panel) => {
+        panel.classList.remove("active");
+        const cards = panel.querySelectorAll(".product-card");
+        cards.forEach((card) => {
+          card.style.opacity = "0";
+          card.style.transform = "scale(0.8) translateY(30px)";
+          card.style.animation = "none";
+        });
+      });
+      
       button.classList.add("active");
-
+      
       const targetId = button.getAttribute("data-target");
       const targetPanel = document.getElementById(targetId);
-
+      
       if (targetPanel) {
-        targetPanel.classList.add("active");
-        AOS.refresh();
+        setTimeout(() => {
+          targetPanel.classList.add("active");
+          
+          const cards = targetPanel.querySelectorAll(".product-card");
+          cards.forEach((card, index) => {
+            setTimeout(() => {
+              card.style.opacity = "1";
+              card.style.transform = "scale(1) translateY(0)";
+              card.style.animation = `blurFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards`;
+            }, index * 150);
+          });
+          
+          // تأخير AOS.refresh لمنع القفز
+          setTimeout(() => {
+            if (!isMobile) AOS.refresh();
+          }, 700);
+        }, 50);
       }
     });
   });
 
-  // 4. تغيير شفافية الهيدر عند النزول بالصفحة
+  // 4. الهيدر
   const header = document.querySelector(".main-header");
   window.addEventListener("scroll", () => {
     if (window.scrollY > 50) {
@@ -70,15 +95,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 5. معرض الصور المخصص (Lightbox) - يعمل مع جميع الأقسام بما فيها الأبواب الخشبية
+  // 5. Lightbox
   const lightboxOverlay = document.createElement("div");
   lightboxOverlay.className = "lightbox-overlay";
   lightboxOverlay.innerHTML = `
     <div class="lightbox-content">
       <button class="lightbox-close" aria-label="إغلاق"><i class="fas fa-times"></i></button>
-      <button class="lightbox-nav lightbox-prev hover-target" aria-label="السابق"><i class="fas fa-chevron-right"></i></button>
+      <button class="lightbox-nav lightbox-prev" aria-label="السابق"><i class="fas fa-chevron-right"></i></button>
       <img src="" alt="صورة المنتج" class="lightbox-image">
-      <button class="lightbox-nav lightbox-next hover-target" aria-label="التالي"><i class="fas fa-chevron-left"></i></button>
+      <button class="lightbox-nav lightbox-next" aria-label="التالي"><i class="fas fa-chevron-left"></i></button>
     </div>
   `;
   document.body.appendChild(lightboxOverlay);
@@ -89,11 +114,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const openLightbox = (wrapper) => {
     const hiddenImagesDiv = wrapper.querySelector(".hidden-images");
     if (!hiddenImagesDiv) return;
-
     const imgs = hiddenImagesDiv.querySelectorAll("img");
     currentImages = Array.from(imgs).map((img) => img.src);
     currentIndex = 0;
-
     updateLightboxImage();
     lightboxOverlay.classList.add("active");
     document.body.style.overflow = "hidden";
@@ -120,62 +143,44 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  lightboxOverlay
-    .querySelector(".lightbox-close")
-    .addEventListener("click", closeLightbox);
-
+  lightboxOverlay.querySelector(".lightbox-close").addEventListener("click", closeLightbox);
   lightboxOverlay.addEventListener("click", (e) => {
-    if (e.target === lightboxOverlay) {
-      closeLightbox();
-    }
+    if (e.target === lightboxOverlay) closeLightbox();
+  });
+  lightboxOverlay.querySelector(".lightbox-next").addEventListener("click", (e) => {
+    e.stopPropagation();
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    updateLightboxImage();
+  });
+  lightboxOverlay.querySelector(".lightbox-prev").addEventListener("click", (e) => {
+    e.stopPropagation();
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    updateLightboxImage();
   });
 
-  lightboxOverlay
-    .querySelector(".lightbox-next")
-    .addEventListener("click", (e) => {
-      e.stopPropagation();
-      currentIndex = (currentIndex + 1) % currentImages.length;
-      updateLightboxImage();
-    });
-
-  lightboxOverlay
-    .querySelector(".lightbox-prev")
-    .addEventListener("click", (e) => {
-      e.stopPropagation();
-      currentIndex =
-        (currentIndex - 1 + currentImages.length) % currentImages.length;
-      updateLightboxImage();
-    });
-
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && lightboxOverlay.classList.contains("active"))
-      closeLightbox();
+    if (e.key === "Escape" && lightboxOverlay.classList.contains("active")) closeLightbox();
     if (e.key === "ArrowLeft" && lightboxOverlay.classList.contains("active")) {
       currentIndex = (currentIndex + 1) % currentImages.length;
       updateLightboxImage();
     }
-    if (
-      e.key === "ArrowRight" &&
-      lightboxOverlay.classList.contains("active")
-    ) {
-      currentIndex =
-        (currentIndex - 1 + currentImages.length) % currentImages.length;
+    if (e.key === "ArrowRight" && lightboxOverlay.classList.contains("active")) {
+      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
       updateLightboxImage();
     }
   });
 
-  // 6. عدادات الإحصائيات المتحركة المحسنة
+  // 6. العدادات
   const counters = document.querySelectorAll(".counter-num");
   const sectionAbout = document.getElementById("about");
   let started = false;
-
+  
   const animateCounters = () => {
     counters.forEach((counter) => {
       const target = parseInt(counter.getAttribute("data-target"));
       let count = 0;
       const duration = 2000;
       const increment = target / (duration / 16);
-
       const updateCount = () => {
         count += increment;
         if (count < target) {
@@ -190,36 +195,27 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   window.addEventListener("scroll", () => {
-    if (
-      sectionAbout &&
-      window.scrollY >= sectionAbout.offsetTop - 300 &&
-      !started
-    ) {
+    if (sectionAbout && window.scrollY >= sectionAbout.offsetTop - 300 && !started) {
       started = true;
       animateCounters();
     }
   });
 
-  // 7. تأثير الإمالة ثلاثي الأبعاد (3D Tilt) - يعمل على جميع الكروت بما فيها الأبواب الخشبية
-  if (window.matchMedia("(hover: hover)").matches) {
+  // 7. 3D Tilt - فقط للكمبيوتر
+  if (window.matchMedia("(hover: hover)").matches && !isMobile) {
     const tiltCards = document.querySelectorAll(".glass-tilt");
-
     tiltCards.forEach((card) => {
       card.addEventListener("mousemove", (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-
         const xRotation = -(((y - rect.height / 2) / rect.height) * 6);
         const yRotation = ((x - rect.width / 2) / rect.width) * 6;
-
         card.style.transform = `perspective(1000px) rotateX(${xRotation}deg) rotateY(${yRotation}deg) translateY(-5px)`;
         card.style.transition = "transform 0.1s ease-out";
       });
-
       card.addEventListener("mouseleave", () => {
-        card.style.transform =
-          "perspective(1000px) rotateX(0) rotateY(0) translateY(0)";
+        card.style.transform = "perspective(1000px) rotateX(0) rotateY(0) translateY(0)";
         card.style.transition = "transform 0.5s ease-out";
       });
     });
