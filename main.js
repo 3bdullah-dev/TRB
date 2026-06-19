@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // 1. تشغيل مكتبة الأنيمشن - مع تعطيل على الجوال للأداء
   const isMobile = window.innerWidth < 768;
-  
+
   AOS.init({
     duration: isMobile ? 0 : 800,
     easing: "ease-out-cubic",
@@ -14,13 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // 2. القائمة المتجاوبة
   const menuToggle = document.getElementById("menuToggle");
   const navMenu = document.getElementById("navMenu");
-  
+
   if (menuToggle && navMenu) {
     menuToggle.addEventListener("click", () => {
       navMenu.classList.toggle("active");
       const icon = menuToggle.querySelector("i");
-      icon.className = navMenu.classList.contains("active") 
-        ? "fas fa-times" 
+      icon.className = navMenu.classList.contains("active")
+        ? "fas fa-times"
         : "fas fa-bars";
     });
   }
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 3. التبويبات مع إصلاح القفز
   const tabButtons = document.querySelectorAll(".tab-btn");
   const tabPanels = document.querySelectorAll(".tab-panel");
-  
+
   tabButtons.forEach((button) => {
     button.addEventListener("click", () => {
       tabButtons.forEach((btn) => btn.classList.remove("active"));
@@ -53,16 +53,16 @@ document.addEventListener("DOMContentLoaded", () => {
           card.style.animation = "none";
         });
       });
-      
+
       button.classList.add("active");
-      
+
       const targetId = button.getAttribute("data-target");
       const targetPanel = document.getElementById(targetId);
-      
+
       if (targetPanel) {
         setTimeout(() => {
           targetPanel.classList.add("active");
-          
+
           const cards = targetPanel.querySelectorAll(".product-card");
           cards.forEach((card, index) => {
             setTimeout(() => {
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
               card.style.animation = `blurFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards`;
             }, index * 150);
           });
-          
+
           // تأخير AOS.refresh لمنع القفز
           setTimeout(() => {
             if (!isMobile) AOS.refresh();
@@ -143,29 +143,41 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  lightboxOverlay.querySelector(".lightbox-close").addEventListener("click", closeLightbox);
+  lightboxOverlay
+    .querySelector(".lightbox-close")
+    .addEventListener("click", closeLightbox);
   lightboxOverlay.addEventListener("click", (e) => {
     if (e.target === lightboxOverlay) closeLightbox();
   });
-  lightboxOverlay.querySelector(".lightbox-next").addEventListener("click", (e) => {
-    e.stopPropagation();
-    currentIndex = (currentIndex + 1) % currentImages.length;
-    updateLightboxImage();
-  });
-  lightboxOverlay.querySelector(".lightbox-prev").addEventListener("click", (e) => {
-    e.stopPropagation();
-    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-    updateLightboxImage();
-  });
+  lightboxOverlay
+    .querySelector(".lightbox-next")
+    .addEventListener("click", (e) => {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % currentImages.length;
+      updateLightboxImage();
+    });
+  lightboxOverlay
+    .querySelector(".lightbox-prev")
+    .addEventListener("click", (e) => {
+      e.stopPropagation();
+      currentIndex =
+        (currentIndex - 1 + currentImages.length) % currentImages.length;
+      updateLightboxImage();
+    });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && lightboxOverlay.classList.contains("active")) closeLightbox();
+    if (e.key === "Escape" && lightboxOverlay.classList.contains("active"))
+      closeLightbox();
     if (e.key === "ArrowLeft" && lightboxOverlay.classList.contains("active")) {
       currentIndex = (currentIndex + 1) % currentImages.length;
       updateLightboxImage();
     }
-    if (e.key === "ArrowRight" && lightboxOverlay.classList.contains("active")) {
-      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    if (
+      e.key === "ArrowRight" &&
+      lightboxOverlay.classList.contains("active")
+    ) {
+      currentIndex =
+        (currentIndex - 1 + currentImages.length) % currentImages.length;
       updateLightboxImage();
     }
   });
@@ -174,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const counters = document.querySelectorAll(".counter-num");
   const sectionAbout = document.getElementById("about");
   let started = false;
-  
+
   const animateCounters = () => {
     counters.forEach((counter) => {
       const target = parseInt(counter.getAttribute("data-target"));
@@ -195,7 +207,11 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   window.addEventListener("scroll", () => {
-    if (sectionAbout && window.scrollY >= sectionAbout.offsetTop - 300 && !started) {
+    if (
+      sectionAbout &&
+      window.scrollY >= sectionAbout.offsetTop - 300 &&
+      !started
+    ) {
       started = true;
       animateCounters();
     }
@@ -215,14 +231,13 @@ document.addEventListener("DOMContentLoaded", () => {
         card.style.transition = "transform 0.1s ease-out";
       });
       card.addEventListener("mouseleave", () => {
-        card.style.transform = "perspective(1000px) rotateX(0) rotateY(0) translateY(0)";
+        card.style.transform =
+          "perspective(1000px) rotateX(0) rotateY(0) translateY(0)";
         card.style.transition = "transform 0.5s ease-out";
       });
     });
   }
 });
-
-
 
 
 // FAQ Accordion
