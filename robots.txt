@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /assets/
+Disallow: /images/private/
+
+Sitemap: https://trbfactory.online/sitemap.xml
